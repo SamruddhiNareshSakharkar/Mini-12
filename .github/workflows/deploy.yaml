@@ -1,0 +1,53 @@
+name: Multi Environment Pipeline
+
+on:
+  push:
+    branches:
+      - dev
+      - staging
+      - main
+
+jobs:
+
+  deploy-dev:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: docker build -t app-dev .
+
+      - name: Deploy to Dev
+        run: echo "Deploying to DEV Environment"
+
+  deploy-staging:
+    if: github.ref == 'refs/heads/staging'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: docker build -t app-staging .
+
+      - name: Deploy to Staging
+        run: echo "Deploying to STAGING Environment"
+
+  deploy-prod:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: docker build -t app-prod .
+
+      - name: Deploy to Production
+        run: echo "Deploying to PRODUCTION Environment"
+        

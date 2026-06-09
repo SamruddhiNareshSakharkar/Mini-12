@@ -1,2 +1,3 @@
 print("Multi Environment Deployment Pipeline Running")
-Staging update
+print("Dev update")
+print("Staging update")
